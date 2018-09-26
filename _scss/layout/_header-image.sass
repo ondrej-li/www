@@ -1,0 +1,121 @@
+// Header Layout
+header.site-header
+  position: relative
+  overflow: hidden
+  color: $text-color-light
+
+  .avatar
+    border: 5px solid $text-color-light
+    border-radius: 50%
+    margin-top: 90px
+    margin-bottom: 60px
+    padding: 10px
+    transition: transform 280ms ease
+
+    img
+      border: 15px solid $text-color-light
+      border-radius: 50%
+      background-color: $text-color-light
+      vertical-align: middle
+      transition: transform 300ms ease
+
+    &:hover
+      transform: scale(0.8)
+
+      img
+        transform: scale(0.8)
+
+  .info-wrapper
+    display: block
+    position: absolute
+    top: 100%
+    left: 0
+    right: 0
+    z-index: 2
+
+    .info
+      font-size: 2.78rem
+      margin-bottom: 60px
+
+      p.lead
+        font-weight: lighter
+        margin: 0
+
+        &.name
+          font-weight: bold
+
+    .jobs
+      line-height: 1.4
+      margin-bottom: 60px
+
+  .container-wrapper
+    position: relative
+    padding-bottom: calc(0.5 * 700px)
+    background:
+      color: $primary
+      size: cover
+
+    &::before
+      content: ''
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      background:
+        image: url(../images/line-pattern.png)
+
+    .left,
+    .right
+      display: block
+      position: absolute
+      width: 50%
+      bottom: 0
+      border-left: 50vw solid $primary-dark
+      border-right: 50vw solid $primary-dark
+      border-top: calc(0.45 * 500px) solid transparent
+
+      &::before
+        content: ''
+        position: absolute
+        width: 100%
+        bottom: 0
+        z-index: 6
+        border-top: calc(0.3 * 500px) solid transparent
+
+    .right
+      &::before
+        left: 0
+        border-left: 0 solid transparent
+        border-right: 50vw solid $background
+
+    .left
+      &::before
+        right: 0
+        border-left: 50vw solid $background
+        border-right: 0 solid transparent
+
+    .container
+
+  &:hover
+    .container-wrapper
+      .container
+        &::after
+          transform: translate(-50%, 10%)
+
+  @media (max-width: 768px)
+    .avatar
+      margin: 30px 15%
+
+    .info-wrapper
+      .info
+        font-size: 2rem
+        margin-bottom: 30px
+
+      .jobs
+        font-size: 0.9rem
+
+    .container-wrapper
+      margin-bottom: calc(0.4 * 700px)
+
+      .container

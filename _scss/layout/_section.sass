@@ -1,0 +1,42 @@
+// Sections Layout
+section.section
+
+  padding: 120px 0 120px 0
+
+  &:nth-child(2n)
+    background-color: $background-light
+
+  .section-header
+
+    .section-title
+      color: $text-color-dark
+      font-weight: 300
+      font-size: 2.78rem
+      margin: 0
+
+      &:after
+        content: ''
+        display: block
+        position: relative
+        background:
+          image: url('../images/separator.svg')
+          repeat: no-repeat
+          size: cover
+        margin-top: 30px
+        width: 100%
+        padding-bottom: 8%
+
+  .section-description
+    p
+      margin: 0
+
+  .container
+    margin-top: 90px
+
+    &:first-child
+      margin-top: 0
+
+  @media (max-width: 768px)
+    .section-header
+      .section-title
+        font-size: 2rem

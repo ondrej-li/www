@@ -1,0 +1,22 @@
+// Progress Bar Component
+.progress-bar
+  padding: 15px 0
+  font-size: 1.67rem
+
+  .bar
+    display: block
+    width: 100%
+    height: 20px
+    margin: 5px 0
+    background-color: $primary-light
+
+    .bar-percent
+      display: block
+      height: 20px
+      margin: 5px 0
+      background-color: $primary
+      transition: transform 300ms ease
+
+  &:hover
+    .bar-percent
+      transform: scale(1.01, 1.4)

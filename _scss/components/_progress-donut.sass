@@ -1,0 +1,47 @@
+// Progress Donut Component
+.progress-donut
+  margin-bottom: 60px
+
+  span
+    display: block
+    text-transform: uppercase
+
+  .company
+    font-weight: lighter
+    font-size: 1.2rem
+    margin-bottom: 6px
+
+  .name
+    font-size: 1.7rem
+
+  .circle
+    margin-bottom: 30px
+    transition: transform 280ms ease
+    transform: rotate(270deg)
+
+    .percent
+      display: inline-block
+      position: absolute
+      top: 50%
+      left: 50%
+      color: $primary
+      font-size: 2.2rem
+      text-align: center
+      transform: translate(-50%, -50%) rotate(-270deg)
+      transition: transform 300ms ease
+
+    circle
+      stroke-width: 10px
+
+      &.front
+        stroke: $primary
+
+      &.back
+        stroke: $primary-light
+
+  &:hover
+    .circle
+      transform: rotate(270deg) scale(1.03)
+
+      span.percent
+        transform: translate(-50%, -50%) rotate(-270deg) scale(1.1)

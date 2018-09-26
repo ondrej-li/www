@@ -1,0 +1,63 @@
+// Service Box Component
+.service-box
+  position: relative
+  margin-top: 40px
+  margin-bottom: 60px
+  border: 1px solid $text-color
+  transition: transform 300ms ease, box-shadow 300ms ease
+
+  .icon-box
+    display: block
+    position: absolute
+    left: 50%
+    width: 30%
+    max-width: 80px
+    transform: translate(-50%, -50%)
+
+    span
+      position: absolute
+      top: 50%
+      left: 50%
+      font-size: 1.8rem
+      transform: translate(-50%, -50%)
+
+    svg
+      path
+        stroke-width: 8px
+        stroke: $text-color-dark
+        transition: stroke 300ms ease
+
+      polygon
+        fill: $background
+
+  h3
+    margin-top: 60px
+    font-weight: 400
+    font-size: 1.4rem
+
+  p
+    font-size: 0.95rem
+    padding: 0 10px
+
+  hr
+    width: 30%
+    margin: 30px auto
+    border: 0
+    border-top: 2px solid $text-color
+
+  &:hover
+    transform: translateY(-10px)
+    box-shadow: 0px 7px 10px 1px transparentize($text-color, 0.5)
+
+    .icon-box
+      svg
+        path
+          stroke: $primary
+
+section.section
+  &:nth-child(2n)
+    .service-box
+      .icon-box
+        svg
+          polygon
+            fill: $background-light

@@ -1,0 +1,130 @@
+// Node Box Component
+.node-box
+  position: relative
+  margin-bottom: 120px
+
+  &:nth-child(2n+2)
+    flex-direction: row-reverse
+
+    .time
+      right: auto
+      left: 15px
+
+    .info
+      right: 15px
+      left: auto
+      text-align: right
+
+  .time
+    display: block
+    position: absolute
+    top: 50%
+    right: 15px
+    transform: translateY(-50%)
+    text-transform: uppercase
+
+    small
+      font-size: 1.2rem
+
+    .year
+      font-size: 3.3rem
+
+  .node
+    margin: 0 auto
+    width: 60%
+    max-width: 120px
+
+    .circle
+      position: relative
+      width: 100%
+      padding-bottom: calc(100% - 20px)
+      border-radius: 50%
+      border: 10px solid $primary
+      background-color: $primary-dark
+      transition: transform 300ms ease
+
+      span
+        position: absolute
+        display: block
+        top: 50%
+        left: 50%
+        color: $text-color-light
+        font-size: 2.5rem
+        transform: translate(-50%, -50%)
+
+  .info
+    display: block
+    position: absolute
+    top: 50%
+    left: 15px
+    transform: translateY(-50%)
+
+    .title
+      display: inline-block
+      font-size: 1.2rem
+      font-weight: bolder
+      text-transform: uppercase
+      margin-bottom: 5px
+
+    .description
+      font-size: 0.99rem
+      margin: 0
+
+  .text
+    text-transform: uppercase
+    font-size: 1.4rem
+    line-height: 1.4
+    color: $primary
+
+  &::after
+    display: block
+    position: absolute
+    content: ''
+    width: 2px
+    height: 60px
+    left: 50%
+    top: calc(100% + 30px)
+    background-color: $primary
+    transform: translateX(-50%)
+
+  &:last-child
+    margin-bottom: 0
+
+    &::after
+      display: none
+
+  &:hover
+    .node
+      .circle
+        transform: scale(1.05)
+
+  @media (max-width: 992px)
+
+    &,
+    &:nth-child(2n+2)
+      flex-direction: row
+
+      .time,
+      .info
+        text-align: center
+        position: relative
+        margin: 0
+        left: 0
+        right: 0
+
+      .time
+        .year
+          &,
+          small
+            font-size: 2rem
+
+      .col-lg-2
+        order: 0
+        margin-bottom: 30px
+
+      .col-lg-5:first-child
+        order: 1
+        margin-bottom: 10px
+
+      .col-lg-5:last-child
+        order: 2

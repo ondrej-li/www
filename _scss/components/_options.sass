@@ -1,0 +1,94 @@
+// Colors Options Component
+.options
+  display: block
+  position: fixed
+  width: 400px
+  max-width: calc(100% - 100px)
+  top: 100px
+  right: 0
+  z-index: 99999
+  background-color: $background
+  transition: transform 300ms ease
+  filter: drop-shadow(0 5px 5px $shadow-color)
+
+  &.closed
+    transform: translateX(100%)
+
+  .icon
+    position: absolute
+    padding: 15px
+    right: 100%
+    background-color: $background
+    cursor: pointer
+
+  .colors
+    padding: 30px
+
+    li
+      margin-bottom: 30px
+      transition: transform 100ms ease
+      cursor: pointer
+
+      &:last-child
+        margin-bottom: 0
+
+      &:hover
+        transform: scale(1.02)
+
+    span
+      display: block
+      padding: 30px
+      width: 33.33%
+      float: left
+      transition: transform 300ms ease
+
+      &:hover
+        transform: scale(1.1)
+
+    p.lead
+      font-size: 1.5rem
+      margin: 0 0 30px 0
+
+    .red
+
+      .primary-light
+        background-color: $primary-light-red
+
+      .primary
+        background-color: $primary-red
+
+      .primary-dark
+        background-color: $primary-dark-red
+
+    .blue
+
+      .primary-light
+        background-color: $primary-light-blue
+
+      .primary
+        background-color: $primary-blue
+
+      .primary-dark
+        background-color: $primary-dark-blue
+
+    .green
+
+      .primary-light
+        background-color: $primary-light-green
+
+      .primary
+        background-color: $primary-green
+
+      .primary-dark
+        background-color: $primary-dark-green
+
+    .purple
+
+      .primary-light
+        background-color: $primary-light-purple
+
+      .primary
+        background-color: $primary-purple
+
+      .primary-dark
+        background-color: $primary-dark-purple

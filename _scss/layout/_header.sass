@@ -1,0 +1,95 @@
+// Header Layout
+header.site-header
+  color: $text-color-light
+  position: relative
+  overflow: hidden
+
+  .container-wrapper
+    background:
+      color: $primary
+
+  .avatar
+    margin: 70px 0
+    padding: 0 15%
+
+    .image-wrapper
+      padding: 8px
+      border: 3px solid $white
+      border-radius: 50%
+      transition: transform 280ms ease
+
+      img
+        display: block
+        vertical-align: middle
+        background-color: $text-color-light
+        border: 10px solid $text-color-light
+        border-radius: 50%
+        transition: transform 280ms ease
+
+      &:hover
+        transform: scale(0.95)
+
+        img
+          transform: scale(0.92)
+
+  .info-wrapper
+    position: absolute
+    width: 100%
+    left: 0
+    right: 0
+    z-index: 5
+
+    .info
+      font-size: 2.7rem
+      margin-bottom: 60px
+
+      p.lead
+        font-weight: lighter
+        margin: 0
+
+        &.name
+          font-weight: bold
+
+    .jobs
+      font-size: 1.1rem
+      line-height: 1.4
+      margin-bottom: 30px
+
+  .container
+    margin-bottom: calc(0.3 * 1200px)
+
+    &::before,
+    &::after
+      content: ''
+      display: block
+      position: absolute
+      top: 100%
+      left: 50%
+      transform: translateX(-50%)
+
+    &::before
+      border-left: 700px solid transparent
+      border-right: 700px solid transparent
+      border-top: calc(0.45 * 700px) solid $primary
+      filter: drop-shadow(0 22px 10px $shadow-color)
+      z-index: 3
+
+    &::after
+      border-left: 900px solid transparent
+      border-right: 900px solid transparent
+      border-top: calc(0.245 * 1200px) solid $primary-dark
+      z-index: 2
+
+  @media (max-width: 768px)
+
+    .avatar
+      margin: 25px 0
+      padding: 0 15%
+
+    .info-wrapper
+      .info
+        font-size: 2rem
+        margin-bottom: 30px
+
+      .jobs
+        font-size: 0.9rem

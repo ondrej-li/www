@@ -1,0 +1,51 @@
+// Form Component
+form
+
+  input,
+  textarea
+    display: block
+    width: 100%
+    font-size: 1.1rem
+    font-family: 'Roboto', sans-serif
+    margin: 15px 0
+    border: 0
+    padding: 0 20px
+    border-bottom: 4px solid $primary
+    outline-color: $primary
+    outline-width: 1px
+    background-color: $background-lighter
+    transition: background-color 300ms ease
+
+    &:hover
+      background-color: lighten($primary-light, 20%)
+
+  input
+    height: 55px
+
+  textarea
+    padding: 20px
+
+  button
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 60px
+    width: 100%
+    max-width: 300px
+    color: $text-color-light
+    background-color: $primary
+    font-size: 1.2rem
+    margin: 15px 0
+    border: 0
+    outline: 0
+    margin-left: 50%
+    transform: translateX(-50%)
+    cursor: pointer
+    transition: background-color 300ms ease
+
+    &:hover
+      background-color: lighten($primary, 5%)
+
+    span
+      font-size: 2rem
+      margin-right: 5px
