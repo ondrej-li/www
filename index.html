@@ -195,7 +195,8 @@
               </svg>
             </span>
             <h3>Enteprise Application Design</h3>
-            <p>End to end enterprise application design. Starting from data structure design, to API and intergration design.</p>
+            <p>End to end enterprise application design. Starting from data structure design, to API and intergration
+              design.</p>
             <hr class="underline">
           </div>
         </div>
@@ -214,7 +215,8 @@
               </svg>
             </span>
             <h3>DevOps</h3>
-            <p>I like to take a full reponsibility. That means not only developing applications but also running the applications. Nowadays, I mostly rely on the power of the cloud and kubernetes.</p>
+            <p>I like to take a full reponsibility. That means not only developing applications but also running the
+              applications. Nowadays, I mostly rely on the power of the cloud and kubernetes.</p>
             <hr class="underline">
           </div>
         </div>
@@ -245,7 +247,8 @@
     <div class="container">
       <div class="row section-description">
         <div class="col-md-12 text-center">
-          <p>Over the period of 20 years I've worked with many languages, tools, technologies and seen them come and go. The following is a list of those I use currently. </p>
+          <p>Over the period of 20 years I've worked with many languages, tools, technologies and seen them come and
+            go. The following is a list of those I use currently. </p>
         </div>
       </div>
     </div>
@@ -572,7 +575,8 @@
     <div class="container">
       <div class="row section-description">
         <div class="col-md-12 text-center">
-          <p>Over the years I've worked as software developer I participated on numerous projects and worked for several companies and corporations. The following is an incomplete list of major projects I was part of.</p>
+          <p>Over the years I've worked as software developer I participated on numerous projects and worked for
+            several companies and corporations. The following is an incomplete list of major projects I was part of.</p>
         </div>
       </div>
     </div>
@@ -713,158 +717,97 @@
     </div>
 
     <div class="container">
+
       <div class="row section-description">
         <div class="col-md-12">
-          <p><b>IoT platform backend development</b><i style="margin-left:50px">2016 - 2018</i><b style="margin-left:50px">O2.cz</b><br/>
+          <section style="margin-bottom: 50px"><b>IoT platform backend development</b><i class="offset-1">2016 - 2018</i><b
+              class="offset-1">O2.cz</b><br />
 
-            <b>Description</b>: Contracting for one of the biggest Czech mobile operators.
-            My role: Developing a back-end of a consumer IoT stack. All applications were built as green field projects with the Go language. All applications had unit and integration tests and were fully dockerized. Application integration was done via gRPC messaging (bespoken in-house solution). Applications could compile in under a second, including running complete unit test suite. All applications had startup time well under a second. Memory footprint was circa 10MB per application after.
-            Main achievement: As the first developer working on the solution I had to do the full application landscape setup. From installation and configuration of the application servers (15 development app servers), through setting up CI, docker including docker registry, nginx, firewalls to TLS (including setting up a certificate authority in Golang). 
-            Technologies: Go (roughly 100.000 LoC) as a programming language, Groovy and Python for occasional scripting, gRPC for remote procedure calls, Rest services (definitions in Swagger) for mobile application interoperability, Postgres as a database storage, Cassandra/BigTable as a big data storage, Firebase for real-time mobile app updates and push notifications (FCM), Kubernetes/Docker and Ansible for runtime isolation and resource management.
-            </p>
+            <b>Description</b>: Contracting for one of the biggest Czech mobile operators.<br />
+            <b>My role</b>: Developing a back-end of a consumer IoT stack. All applications were built as green field
+            projects with the Go language. All applications had unit and integration tests and were fully dockerized.
+            Application integration was done via gRPC messaging (bespoken in-house solution). Applications could
+            compile in under a second, including running complete unit test suite. All applications had startup time
+            well under a second. Memory footprint was circa 10MB per application after.<br />
+            <b>Main achievement</b>: As the first developer working on the solution I had to do the full application
+            landscape setup. From installation and configuration of the application servers (15 development app
+            servers), through setting up CI, docker including docker registry, nginx, firewalls to TLS (including
+            setting up a certificate authority in Golang). In the later phase I successfully migrated this solution
+            onto Google Cloud's Kubernetes cluster.<br />
+            <b>Technologies</b>: Go (roughly 100.000 LoC) as a programming language, Groovy and Python for occasional
+            scripting, gRPC for remote procedure calls, Rest services (definitions in Swagger) for mobile application
+            interoperability, Postgres as a database storage, Cassandra/BigTable as a big data storage, Firebase for
+            real-time mobile app updates and push notifications (FCM), Kubernetes/Docker and Ansible for runtime
+            isolation and resource management.
+          </section>
+          <section style="margin-bottom: 50px"><b>Tour operator website remake</b><i class="offset-1">2014 - 2016</i><b
+              class="offset-1">Zájezdy.cz</b><br />
+            <b>Description</b>: Contract working on a new web site for the company Zajezdy.cz. The web site allows
+            customers to find their package holiday and order it. Orders and CRM are then handled by other bespoken
+            systems.<br />
+            <b>My role</b>: The web site is composed out of several key components and runs on top of the Grails
+            framework. My role was to implement the search and recommendation facility, data integration and sourcing
+            of data. In order to perform fast searches Apache Solr was used operating over a highly denormalized
+            dataset that was generated by a Spring XD instance. As most of the data was static a heavy caching was
+            involved using a Hazelcast distributed map system.<br />
+            <b>Main achievement</b>: Hazelcast implementation including a bespoken monitoring and administration tool
+            as the one provided by the Hazelcast manufacturer is rather expensive.<br />
+            <b>Technologies</b>: Grails to run the web site, Apache SolrCloud for fast searching, Spring XD for data
+            integration, Hazelcast for caching and distributed objects, Docker as a runtime container and MySql as the
+            database.
+          </section>
+          <section style="margin-bottom: 50px"><b>PWSS</b><i class="offset-1">2010 - 2013</i><b class="offset-1">Motability
+              Operations Plc</b><br />
+            <b>Description</b>: A project to deliver and enhance an application that allows managing the full
+            life-cycle (application for a product, in-life support and disposal) of powered wheelchair and scooter
+            leasing. <br />
+            <b>My role</b>: Prototyping and developing the main application from its inception to its release and
+            running.<br />
+            <b>Main achievement</b>: Application delivered on time for less thanks to using at that time new framework
+            Groovy/Grails.<br />
+            <b>Technologies</b>: JBoss/Groovy/Grails/Oracle/HTML to deliver the main application, Spring/Hibernate/MS
+            SQL/WS to deliver a bridge application between the customer facing application and our backend,
+            Spring/Hibernate/PL-SQL/JMS to deliver the dealer reward system.
+          </section>
+          <section style="margin-bottom: 50px"><b>MDP</b><i class="offset-1">2012</i><b class="offset-1">Motability
+              Operations Plc</b><br />
+            <b>Description</b>: A stand-alone application to calculate and award money rewarding dealers for adhering
+            to our rules.<br />
+            <b>My role</b>: Designing, developing and extending the application.<br />
+            <b>Main achievement</b>: Application delivered in 9 months from the initial stage working against a fixed
+            deadline thanks to using Grails and employing vanilla scrum methodology.<br />
+            <b>Technologies</b>: Weblogic/Grails/PL-SQL/ODI(ETL)/WS/JQuery/JSON
+          </section>
+          <section style="margin-bottom: 50px"><b>Price guide</b><i class="offset-1">2011</i><b class="offset-1">Motability
+              Operations Plc</b><br />
+            <b>Description</b>: A portlet style application allowing our customers to choose their cars online.<br />
+            <b>My role</b>: Data sourcing, system integration, offshore team liaising.<br />
+            <b>Main achievement</b>: By constantly giving feedback to our management team prevented a failure by
+            identifier dishonest practices of our 3rd party providers.<br />
+            <b>Technologies</b>: Tomcat/MS-SQL/SOA/PL-SQL
+          </section>
+          <section style="margin-bottom: 50px"><b>LES</b><i class="offset-1">2008 - 2011</i><b class="offset-1">Motability
+              Operations Plc</b><br />
+            <b>Description</b>: An application allowing our pricing team to simulate a live of a vehicle (asset price,
+            advance payment, rentals, taxes, mandatory payments, depreciation to name a few) and thus produce correct
+            prices (initial payments, weekly rentals and more)<br />
+            <b>My role</b>: Enhancing the application, in a later stage replacing the calculation engine<br />
+            <b>Main achievement</b>: Replacing the calculation engine while assuring continuity and consistency of
+            pricing.<br />
+            <b>Technologies</b>: JBoss/MS-SQL/Struts/XML/JQuery
+          </section>
+          <section style="margin-bottom: 50px"><b>OLA</b><i class="offset-1">2006 - 2008</i><b class="offset-1">Motability
+              Operations Plc</b><br />
+            <b>Description</b>: One of the core application allowing our dealers to apply for cars from Motability.
+            <b>My role</b>: Enhancing the application, adding various functionalities (such as document library,
+            driving licence restrictions)
+            <b>Main achievement</b>: Although not the biggest in terms of size the document library proved to be a
+            success allowing our business team to be closer to dealers.
+            <b>Technologies</b>: JBoss/MS-SQL/Struts/JMS
+
+          </section>
+
         </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-
-
-        <div class="col-lg-3 col-md-6">
-          <div class="project-box">
-            <div class="image">
-              <img src="images/projects/img-01.jpg" alt="Your Project Title 01">
-              <div class="image-hover">
-                <span class="pe-7s-look icon"></span>
-              </div>
-            </div>
-            <div class="title">Your Project Title 01</div>
-            <div class="view-project-cta">
-              <a href="project.example.com"><span class="pe-7s-paper-plane icon"></span> View More</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-lg-3 col-md-6">
-          <div class="project-box">
-            <div class="image">
-              <img src="images/projects/img-02.jpg" alt="Your Project Title 02">
-              <div class="image-hover">
-                <span class="pe-7s-look icon"></span>
-              </div>
-            </div>
-            <div class="title">Your Project Title 02</div>
-            <div class="view-project-cta">
-              <a href="project.example.com"><span class="pe-7s-paper-plane icon"></span> View More</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-lg-3 col-md-6">
-          <div class="project-box">
-            <div class="image">
-              <img src="images/projects/img-03.jpg" alt="Your Project Title 03">
-              <div class="image-hover">
-                <span class="pe-7s-look icon"></span>
-              </div>
-            </div>
-            <div class="title">Your Project Title 03</div>
-            <div class="view-project-cta">
-              <a href="http://project.example.com"><span class="pe-7s-paper-plane icon"></span> View More</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-lg-3 col-md-6">
-          <div class="project-box">
-            <div class="image">
-              <img src="images/projects/img-04.jpg" alt="Your Project Title 04">
-              <div class="image-hover">
-                <span class="pe-7s-look icon"></span>
-              </div>
-            </div>
-            <div class="title">Your Project Title 04</div>
-            <div class="view-project-cta">
-              <a href="http://project.example.com"><span class="pe-7s-paper-plane icon"></span> View More</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-lg-3 col-md-6">
-          <div class="project-box">
-            <div class="image">
-              <img src="images/projects/img-05.jpg" alt="Your Project Title 05">
-              <div class="image-hover">
-                <span class="pe-7s-look icon"></span>
-              </div>
-            </div>
-            <div class="title">Your Project Title 05</div>
-            <div class="view-project-cta">
-              <a href="http://project.example.com"><span class="pe-7s-paper-plane icon"></span> View More</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-lg-3 col-md-6">
-          <div class="project-box">
-            <div class="image">
-              <img src="images/projects/img-06.jpg" alt="Your Project Title 06">
-              <div class="image-hover">
-                <span class="pe-7s-look icon"></span>
-              </div>
-            </div>
-            <div class="title">Your Project Title 06</div>
-            <div class="view-project-cta">
-              <a href="http://project.example.com"><span class="pe-7s-paper-plane icon"></span> View More</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-lg-3 col-md-6">
-          <div class="project-box">
-            <div class="image">
-              <img src="images/projects/img-07.jpg" alt="Your Project Title 07">
-              <div class="image-hover">
-                <span class="pe-7s-look icon"></span>
-              </div>
-            </div>
-            <div class="title">Your Project Title 07</div>
-            <div class="view-project-cta">
-              <a href="http://project.example.com"><span class="pe-7s-paper-plane icon"></span> View More</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-lg-3 col-md-6">
-          <div class="project-box">
-            <div class="image">
-              <img src="images/projects/img-08.jpg" alt="Your Project Title 08">
-              <div class="image-hover">
-                <span class="pe-7s-look icon"></span>
-              </div>
-            </div>
-            <div class="title">Your Project Title 08</div>
-            <div class="view-project-cta">
-              <a href="http://project.example.com"><span class="pe-7s-paper-plane icon"></span> View More</a>
-            </div>
-          </div>
-        </div>
-
-
       </div>
     </div>
 
@@ -887,17 +830,21 @@
         </div>
 
         <div class="row text-center icons">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="pe-7s-phone pe-2x icon"></span>
             <p>+420 607 766 809</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="pe-7s-link pe-2x icon"></span>
             <p>www.ondralinek.cz</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="pe-7s-mail pe-2x icon"></span>
             <p>me@ondralinek.cz</p>
+          </div>
+          <div class="col-md-3">
+            <span class="pe-7s-diskette pe-2x icon"></span>
+            <p><a href="https://www.github.com/defectus">github.com/defectus</a></p>
           </div>
         </div>
 
@@ -926,16 +873,12 @@
     <div class="container">
       <div class="row section-description">
         <div class="col-md-12 text-center">
-          <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-            ut <strong>aliquip ex ea commodo</strong> consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>To enquire about my services or to simply get in touch with me fill in the form below please.</p>
         </div>
       </div>
     </div>
 
-    <form action="https://formspree.io/example@example.com" method="POST" class="contact-form" id="contact_form">
+    <form action="https://formspree.io/me@ondralinek.com" method="POST" class="contact-form" id="contact_form">
       <div class="container">
         <div class="row ">
           <div class="col-md-4 col-md-2 push-md-2">
@@ -964,27 +907,14 @@
   </section>
 
 
-
-
   <!-- Site Footer -->
   <footer class="site-footer">
 
     <div class="large">
       <div class="container">
         <div class="row">
-          <div class="col-lg-2 push-lg-5 logo">
-            <img src="images/logo.svg" alt="John Alexander Logo">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 push-lg-3 text-center">
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum.</p>
-          </div>
-        </div>
-        <div class="row">
           <div class="col-lg-4 col-md-6 push-lg-4 push-md-3 text-center">
-            <a href="http://cv.example.com" class="button-cta">Download CV</a>
+            <a href="https://docs.google.com/document/d/1_SCVtqhN8gTF_pWQcCLiE3wRBqcnWXcwPj_W5kF83vw/edit?usp=sharing" class="button-cta">Download CV</a>
           </div>
         </div>
       </div>
@@ -994,7 +924,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <p>Copyright &copy; 2017 | Gleesik™ - All Right Reserved!</p>
+            <p>Copyright &copy; 2018 | Ondra Linek</p>
           </div>
         </div>
       </div>
