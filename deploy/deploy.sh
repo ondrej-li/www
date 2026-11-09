@@ -57,9 +57,17 @@ sudo systemctl reload nginx
 
 if [ "${SKIP_SYSTEMD:-0}" != "1" ]; then
     echo "==> auto-deploy timer"
-    sudo install -m 0644 -o root -g root deploy/systemd/me-autodeploy.service /etc/systemd/system/me-autodeploy.service
-    sudo install -m 0644 -o root -g root deploy/systemd/me-autodeploy.timer /etc/systemd/system/me-autodeploy.timer
-    sudo systemctl daemon-reload
+    changed=0
+    for unit in me-autodeploy.service me-autodeploy.timer; do
+        if ! sudo cmp -s "deploy/systemd/$unit" "/etc/systemd/system/$unit"; then
+            sudo install -m 0644 -o root -g root "deploy/systemd/$unit" "/etc/systemd/system/$unit"
+            changed=1
+        fi
+    done
+    # Only reload when something actually changed: every daemon-reload
+    # re-runs the system generators, and systemd-ssh-generator logs two
+    # harmless AF_VSOCK errors each time on a box without a vsock device.
+    if [ "$changed" = 1 ]; then sudo systemctl daemon-reload; fi
     sudo systemctl enable --now me-autodeploy.timer >/dev/null
 fi
 
