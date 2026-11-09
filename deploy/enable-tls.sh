@@ -67,8 +67,19 @@ sudo nginx -t
 sudo systemctl reload nginx
 
 echo "==> verifying"
-code="$(curl -sS -o /dev/null -w '%{http_code}' --resolve "$DOMAIN:443:127.0.0.1" "https://$DOMAIN/")"
-echo "    https://$DOMAIN/ -> $code"
+# nginx picks the new config up a moment after `systemctl reload`, so give the
+# reload a few seconds before failing the cutover.
+code=""
+for _ in 1 2 3 4 5; do
+    code="$(curl -sS -o /dev/null -w '%{http_code}' --resolve "$DOMAIN:443:127.0.0.1" "https://$DOMAIN/" 2>/dev/null || true)"
+    [ "$code" = "200" ] && break
+    sleep 1
+done
+echo "    https://$DOMAIN/ -> ${code:-no response}"
+if [ "$code" != "200" ]; then
+    echo "ERROR: HTTPS did not come up; the certificate is installed but the vhost is not healthy." >&2
+    exit 1
+fi
 redirect="$(curl -sS -o /dev/null -w '%{http_code} %{redirect_url}' --resolve "$OLD_DOMAIN:443:127.0.0.1" "https://$OLD_DOMAIN/")"
 echo "    https://$OLD_DOMAIN/ -> $redirect"
 redirect="$(curl -sS -o /dev/null -w '%{http_code} %{redirect_url}' --resolve "$DOMAIN:80:127.0.0.1" "http://$DOMAIN/")"
