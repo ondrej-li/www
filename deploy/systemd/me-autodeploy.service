@@ -1,0 +1,25 @@
+# /etc/systemd/system/me-autodeploy.service
+# Installed by deploy/deploy.sh; enabled by me-autodeploy.timer.
+[Unit]
+Description=me.ondralinek.cz — pull new commits and publish the static site
+Documentation=https://github.com/ondrej-li/www/blob/master/deploy/DEPLOY.md
+Wants=network-online.target
+After=network-online.target
+ConditionPathIsDirectory=/home/deploy/me/.git
+
+[Service]
+Type=oneshot
+User=deploy
+Group=deploy
+WorkingDirectory=/home/deploy/me
+Environment=MAIL_TO=admin@ondralinek.cz
+ExecStart=/home/deploy/me/deploy/autodeploy.sh
+TimeoutStartSec=5min
+Nice=10
+IOSchedulingClass=idle
+
+# deploy.sh needs sudo to rsync into /var/www/me, install the vhost and reload
+# nginx, so filesystem sandboxing would block the legitimate work. The unit
+# still runs as the unprivileged deploy user with a short timeout.
+PrivateTmp=yes
+NoNewPrivileges=no
