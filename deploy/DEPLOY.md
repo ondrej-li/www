@@ -6,12 +6,12 @@ publishes it.
 
 | | |
 |---|---|
-| Host | me.ondralinek.cz (www.ondralinek.cz 301 → me) |
+| Host | me.ondralinek.cz (`www.ondralinek.cz` now serves the landing page) |
 | Web root | `/var/www/me` (deploy:www-data) |
 | Source checkout | `~/me` (deploy user, clone of github.com/ondrej-li/www) |
 | vhost | `/etc/nginx/sites-available/me` → `sites-enabled/me` |
 | headers | `/etc/nginx/snippets/me-headers.conf` (HSTS + CSP + …) |
-| TLS | `/etc/letsencrypt/live/me.ondralinek.cz/` (SANs: me + www) |
+| TLS | `/etc/letsencrypt/live/me.ondralinek.cz/` (SAN: me) |
 | renewal | `certbot.timer`; deploy hook reloads nginx |
 | logs | `/var/log/nginx/me.access.log`, `me.error.log` |
 | auto-deploy | `me-autodeploy.timer` (5 min) → `deploy/autodeploy.sh` |
@@ -55,20 +55,17 @@ The units are versioned in `deploy/systemd/` and (re)installed by `deploy.sh`;
 ## DNS cutover (www / GitHub Pages → this server)
 
 The repo still has a `CNAME` (now `me.ondralinek.cz`) so GitHub Pages keeps a
-usable copy of the site. The live host is this server. Point the new name at
-it — the old address follows:
+usable copy of the site. The live host is this server:
 
 | Type | Name | Value |
 |---|---|---|
 | A | me.ondralinek.cz | `2.31.33.21` |
 | AAAA | me.ondralinek.cz | `2a01:4f8:c016:e828::1` |
-| A | www.ondralinek.cz | `2.31.33.21` (already set) |
-| AAAA | www.ondralinek.cz | `2a01:4f8:c016:e828::1` |
 
-`www.ondralinek.cz` must keep pointing here: its name is in the certificate
-SAN list and it serves the 301 to me. The MX and other mail records on
-`ondralinek.cz` are untouched; the bare name stays unserved by nginx (the
-catch-all drops it) exactly as before.
+`www.ondralinek.cz` is not part of this site any more: it serves the landing
+page at `ondralinek.cz`. The certificate for this host therefore contains only
+`me.ondralinek.cz`; reissue it with `./deploy/enable-tls.sh` if the old SAN is
+still present. The MX and other mail records on `ondralinek.cz` are untouched.
 
 DNS is managed at WebSupport (`ns1.websupport.cz`).
 
@@ -98,7 +95,6 @@ HTTP or HTTPS vhost depending on whether the certificate exists.
 curl -sSI https://me.ondralinek.cz/ | head -8
 curl -sSI https://me.ondralinek.cz/css/style.css | grep -i cache-control
 curl -sSI http://me.ondralinek.cz/ | grep -i location          # -> https
-curl -sSI https://www.ondralinek.cz/ | grep -i location        # -> https://me
 ```
 
 ## Rollback
