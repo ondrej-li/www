@@ -2271,6 +2271,8 @@ section.section {
       padding-bottom: 8%; }
   section.section .section-description p {
     margin: 0; }
+    section.section .section-description p + p {
+      margin-top: 1em; }
   section.section .container {
     margin-top: 90px; }
     section.section .container:first-child {
@@ -2324,7 +2326,7 @@ header.site-header {
     z-index: 5; }
     header.site-header .info-wrapper .info {
       font-size: 2.7rem;
-      margin-bottom: 60px; }
+      margin-bottom: 40px; }
       header.site-header .info-wrapper .info p.lead {
         font-weight: lighter;
         margin: 0; }
