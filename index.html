@@ -13,6 +13,38 @@
   <!-- Importing Styles -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
   <link rel="stylesheet" id="theme" href="css/style.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/dark.css">
+  <script>
+    // Resolve the colour mode before the first paint: an explicit choice wins,
+    // otherwise follow the operating system. Without JavaScript the page stays
+    // on the light theme.
+    (function () {
+      var KEY = 'ondralinek-mode';
+      var root = document.documentElement;
+
+      function stored() {
+        try {
+          var value = window.localStorage.getItem(KEY);
+          return value === 'dark' || value === 'light' ? value : null;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      var prefersDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      root.setAttribute('data-theme', stored() || (prefersDark ? 'dark' : 'light'));
+
+      if (!window.matchMedia) return;
+      var query = window.matchMedia('(prefers-color-scheme: dark)');
+      var follow = function (event) {
+        if (stored()) return;
+        root.setAttribute('data-theme', event.matches ? 'dark' : 'light');
+      };
+      if (query.addEventListener) query.addEventListener('change', follow);
+      else if (query.addListener) query.addListener(follow);
+    })();
+  </script>
 </head>
 
 
@@ -24,6 +56,13 @@
     <span class="pe-7s-settings pe-2x icon" id="toggle_options"></span>
 
     <div class="colors">
+      <p class="lead text-center">Mode</p>
+      <ul class="modes list-style-none">
+        <li data-mode="auto">Auto</li>
+        <li data-mode="light">Light</li>
+        <li data-mode="dark">Dark</li>
+      </ul>
+
       <p class="lead text-center">Colour theme</p>
       <ul class="color-pallete list-style-none">
         <li data-color="red" class="red clearfix">

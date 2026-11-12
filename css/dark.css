@@ -1,0 +1,114 @@
+/* Dark mode for me.ondralinek.cz.
+   Loaded after the colour theme so these overrides win; every rule is scoped
+   to html[data-theme="dark"], which the head script sets before first paint
+   from localStorage, or from prefers-color-scheme when nothing is stored. */
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  background-color: #101318;
+}
+
+html[data-theme="dark"] body {
+  color: #b8c2cf;
+  background-color: #101318;
+}
+
+html[data-theme="dark"] ::selection {
+  color: #fff;
+  background-color: #2a3442;
+}
+
+/* Sections */
+
+html[data-theme="dark"] section.section {
+  background-color: #101318;
+}
+
+html[data-theme="dark"] section.section:nth-child(2n) {
+  background-color: #161b22;
+}
+
+html[data-theme="dark"] section.section .section-header .section-title {
+  color: #e8eef7;
+}
+
+html[data-theme="dark"] section.section .section-header .section-title:after {
+  background-image: url("../images/separator-light.svg");
+  opacity: 0.5;
+}
+
+html[data-theme="dark"] section.section-touch {
+  background-color: #101318 !important;
+}
+
+/* Service boxes */
+
+html[data-theme="dark"] .service-box {
+  border-color: #252c36;
+}
+
+html[data-theme="dark"] .service-box .icon-box svg path {
+  stroke: #8b97a8;
+}
+
+html[data-theme="dark"] .service-box .icon-box svg polygon {
+  fill: #101318;
+}
+
+html[data-theme="dark"] section.section:nth-child(2n) .service-box .icon-box svg polygon {
+  fill: #161b22;
+}
+
+html[data-theme="dark"] .service-box hr {
+  border-top-color: #252c36;
+}
+
+html[data-theme="dark"] .service-box:hover {
+  -webkit-box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.6);
+}
+
+/* Skills */
+
+html[data-theme="dark"] .progress-bar .bar {
+  background-color: #252c36;
+}
+
+html[data-theme="dark"] .progress-donut .circle circle.back {
+  stroke: #2b3340;
+}
+
+/* Contact form */
+
+html[data-theme="dark"] form input,
+html[data-theme="dark"] form textarea {
+  color: #e8eef7;
+  background-color: #1a2029;
+}
+
+html[data-theme="dark"] form input:hover,
+html[data-theme="dark"] form textarea:hover {
+  background-color: #222a35;
+}
+
+html[data-theme="dark"] form input::placeholder,
+html[data-theme="dark"] form textarea::placeholder {
+  color: #7d8899;
+}
+
+/* Options panel */
+
+html[data-theme="dark"] .options {
+  background-color: #161b22;
+  -webkit-filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.6));
+}
+
+html[data-theme="dark"] .options .icon {
+  color: #e8eef7;
+  background-color: #161b22;
+}
+
+html[data-theme="dark"] .options .colors p.lead {
+  color: #e8eef7;
+}

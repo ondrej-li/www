@@ -1,0 +1,52 @@
+/* Small additions on top of the compiled theme: the light/dark switcher and
+   legibility fixes. Kept out of the colour themes so they apply in every
+   palette and in both modes. */
+
+.options .modes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 30px;
+}
+
+/* The colour swatches below are list items too; cancel their spacing. */
+.options .colors .modes li {
+  margin-bottom: 0;
+  padding: 10px 22px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.options .colors .modes li:hover {
+  opacity: 1;
+}
+
+.options .colors .modes li.is-active {
+  opacity: 1;
+  color: #fff;
+  background-color: #545454;
+  border-color: #545454;
+}
+
+html[data-theme="dark"] .options .colors .modes li.is-active {
+  color: #101318;
+  background-color: #e8eef7;
+  border-color: #e8eef7;
+}
+
+/* The contact links sit on the accent band, where the browser default link
+   colour is unreadable (and turns purple once visited). */
+section.section-touch .icons a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}

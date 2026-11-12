@@ -19,6 +19,15 @@ publishes it.
 Everything nginx-related is versioned in this repository under `deploy/`; the
 server copies are installed by `deploy/deploy.sh`.
 
+## Colour mode
+
+The site follows the visitor's operating system by default (`prefers-color-scheme`).
+`css/dark.css` holds the dark overrides, all scoped to `html[data-theme="dark"]`.
+A small inline script in `<head>` sets that attribute before the first paint from
+`localStorage`, falling back to the system preference, so there is no flash of the
+wrong theme. The gear icon in the top-right corner switches between Auto, Light and
+Dark; `css/site.css` styles that switcher and a few legibility fixes.
+
 ## Deploy an update
 
 On the VPS, as `deploy`:
