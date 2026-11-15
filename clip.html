@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Clipboard — Ondra Linek</title>
+  <meta name="description" content="A page I can reach from any machine: notes and a scratch pad that stays in this browser.">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://me.ondralinek.cz/clip.html">
+  <link rel="shortcut icon" href="images/favicon.png" title="Favicon">
+  <link rel="stylesheet" href="css/clip.css">
+  <script>
+    // Same colour mode as the rest of the site: an explicit choice wins,
+    // otherwise follow the operating system. Copied from index.html so the two
+    // pages never disagree about the theme.
+    (function () {
+      var KEY = 'ondralinek-mode';
+      var root = document.documentElement;
+
+      function stored() {
+        try {
+          var value = window.localStorage.getItem(KEY);
+          return value === 'dark' || value === 'light' ? value : null;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      var prefersDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      root.setAttribute('data-theme', stored() || (prefersDark ? 'dark' : 'light'));
+
+      if (!window.matchMedia) return;
+      var query = window.matchMedia('(prefers-color-scheme: dark)');
+      var follow = function (event) {
+        if (stored()) return;
+        root.setAttribute('data-theme', event.matches ? 'dark' : 'light');
+      };
+      if (query.addEventListener) query.addEventListener('change', follow);
+      else if (query.addListener) query.addListener(follow);
+    })();
+  </script>
+</head>
+
+<body>
+  <main class="clip">
+
+    <a class="clip-back" href="/">← me.ondralinek.cz</a>
+    <h1>Clipboard</h1>
+    <p class="clip-lead">
+      Text I want to reach from any machine. The scratch pad stays in this
+      browser — it is never sent anywhere.
+    </p>
+
+    <section>
+      <h2>Scratch pad</h2>
+      <div class="scratch">
+        <textarea id="scratch" spellcheck="false" autocomplete="off"
+          placeholder="Paste anything here…"></textarea>
+        <div class="actions">
+          <button id="copy-scratch" type="button">Copy</button>
+          <button id="clear-scratch" type="button">Clear</button>
+          <span class="status" id="status"></span>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <article>
+      <h2>Pi 400 — fresh Debian 13, booting from USB</h2>
+
+      <p>
+        Pi 400 rev 1 — that's a Pi 4 underneath, so <strong>USB boot is built
+        in</strong>. You don't even need to touch the EEPROM.
+      </p>
+
+      <p>
+        One thing you do need: a USB stick or SSD. There is no way to write a
+        fresh image onto the disk you're currently booted from — the running
+        root filesystem is on that card. A 16–32 GB stick costs a few euros; a
+        USB 3.0 SSD is the better long-term answer, since the Pi 400 has USB 3.0
+        ports and it'll be dramatically faster than the SD.
+      </p>
+
+      <h2 class="step"><span class="num">1.</span> Grab the image (on the Pi)</h2>
+
+      <p>
+        Latest is Debian 13 "Trixie", 6 Oct 2026. Lite (no desktop, 525 MB):
+      </p>
+
+<pre><code>mkdir -p /tmp/newsys &amp;&amp; cd /tmp/newsys
+wget https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2026-10-06/2026-10-06-raspios-trixie-arm64-lite.img.xz
+wget https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2026-10-06/2026-10-06-raspios-trixie-arm64-lite.img.xz.sha256
+sha256sum -c 2026-10-06-raspios-trixie-arm64-lite.img.xz.sha256</code></pre>
+
+      <p>
+        Want the desktop? Same directory, swap <code>raspios_lite_arm64</code>
+        → <code>raspios_arm64</code> and drop <code>-lite</code> (check the exact
+        filename on the <a href="https://www.raspberrypi.com/software/operating-systems/">downloads
+        page</a>).
+      </p>
+
+      <h2 class="step"><span class="num">2.</span> Plug in the USB drive and <em>verify</em> the target</h2>
+
+<pre><code>lsblk -o NAME,SIZE,MODEL,TRAN,MOUNTPOINT</code></pre>
+
+      <p>
+        You want a new <code>/dev/sda</code> with <code>TRAN=usb</code>.
+        <strong><code>/dev/mmcblk0</code> must never appear in the next
+        command</strong> — that's your 64 GB card.
+      </p>
+
+      <h2 class="step"><span class="num">3.</span> Write it</h2>
+
+<pre><code>xz -dc 2026-10-06-raspios-trixie-arm64-lite.img.xz \
+  | sudo dd of=/dev/sda bs=4M conv=fsync status=progress
+sync</code></pre>
+
+      <h2 class="step"><span class="num">4.</span> Pre-seed SSH so it boots headless</h2>
+
+<pre><code>sudo partprobe /dev/sda
+sudo mkdir -p /mnt/boot &amp;&amp; sudo mount /dev/sda1 /mnt/boot
+sudo touch /mnt/boot/ssh
+printf 'pi:%s\n' "$(openssl passwd -6 'your-password')" | sudo tee /mnt/boot/userconf.txt
+sync &amp;&amp; sudo umount /mnt/boot</code></pre>
+
+      <p>
+        SSH is off by default on a fresh Trixie, so that <code>ssh</code> file is
+        what saves you from needing a monitor.
+      </p>
+
+      <h2 class="step"><span class="num">5.</span> Boot from it</h2>
+
+<pre><code>sudo poweroff</code></pre>
+
+      <p>
+        Unplug the power, pop the microSD out (slot on the edge of the case),
+        plug the Pi 400 back in with the USB drive attached. Default boot order
+        is <code>0xf41</code> = SD then USB, so with the card out it goes
+        straight to USB.
+      </p>
+
+      <p>
+        Verify afterwards: <code>vcgencmd bootloader_config | grep BOOT_ORDER</code>
+        and <code>findmnt /</code> should show <code>/dev/sda2</code>.
+      </p>
+
+      <h2 class="step"><span class="num">6.</span> Decide where it lives</h2>
+
+      <h3>Option A — stay on USB (recommended)</h3>
+      <p>
+        Faster, and your 64 GB card stays in a drawer as a working rollback.
+        Nothing else to do.
+      </p>
+
+      <h3>Option B — clone the new system onto the 64 GB card</h3>
+      <p>
+        While booted from USB, the card is idle, so you can write to it:
+      </p>
+
+<pre><code>lsblk -o NAME,SIZE,TRAN,MOUNTPOINT     # confirm mmcblk0 is present and unmounted
+xz -dc /tmp/newsys/2026-10-06-raspios-trixie-arm64-lite.img.xz \
+  | sudo dd of=/dev/mmcblk0 bs=4M conv=fsync status=progress
+sync
+sudo poweroff</code></pre>
+
+      <p>
+        Remove the USB drive, put the card back, boot. The rootfs auto-expands to
+        fill 64 GB on first boot, so no <code>raspi-config</code> resize dance
+        needed.
+      </p>
+
+      <p>
+        If you want both drives in at once later, set
+        <code>BOOT_ORDER=0xf14</code> (USB first) via
+        <code>sudo rpi-eeprom-config --edit</code>.
+      </p>
+
+      <h2>If you genuinely have no spare USB storage</h2>
+
+      <p>
+        Then a clean install isn't possible without some second medium, and your
+        options collapse to:
+      </p>
+
+      <ul>
+        <li>
+          <strong>In-place upgrade</strong>, Buster → Bullseye → Bookworm →
+          Trixie, via <code>legacy.raspbian.org</code>. Each hop can kill
+          networking (<code>dhcpcd</code> → NetworkManager) or booting
+          (<code>/boot</code> → <code>/boot/firmware</code>), and any failure
+          leaves you with a non-booting Pi and no way to fix it. On a custom
+          Amiga image, I'd put the odds below 50%.
+        </li>
+        <li>
+          <strong>Network boot</strong> over the Ethernet port with a TFTP
+          server on your LAN. Clean, but a lot of setup for something a €7 stick
+          solves.
+        </li>
+      </ul>
+
+      <p class="note">
+        Given the Pi 400's USB 3.0 ports, honestly the stick/SSD is the upgrade:
+        you go from an EOL Buster image to current Trixie, keep the old card
+        intact, and end up with a faster machine.
+      </p>
+    </article>
+
+  </main>
+
+  <script src="js/clip.js" charset="utf-8"></script>
+</body>
+
+</html>
