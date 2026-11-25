@@ -49,3 +49,43 @@ and rsyncs into `/var/www/me`, then reloads nginx if the vhost changed. Pushing 
 - No analytics, no cookies, no third-party requests beyond the fonts already
   declared.
 - Anything that must survive `rsync --delete` belongs in the repo, not on the box.
+
+## Before this site goes live
+
+This repository is served publicly at https://me.ondralinek.cz. A change that adds or alters a
+page, a form, a script, a header or a vhost passes the launch gate before it
+ships:
+
+```sh
+web-launch-check https://me.ondralinek.cz
+```
+
+- `FAIL` blocks the publish; `WARN` is a decision to state in the reply, not
+  something to leave unmentioned.
+- The `web-launch-checklist` skill has the 25 items the checker cannot judge:
+  privacy and terms content, colour contrast, real-device speed, spam
+  protection, analytics and error monitoring, one clear call to action, and the
+  signup/login/reset flows.
+- Run it again after publishing: it checks the live vhost, headers and
+  certificate, not the working tree.
+- A preview vhost passes the same gate before DNS moves.
+
+## Deploying this site
+
+https://me.ondralinek.cz is published by the **deploy** account from this repository's
+`master` branch — the `site-deploy` timer, every five minutes. Merge is
+deploy: there is no publish command, and `sudo vps-site publish` refuses this
+web root (one writer per root, and it is not this account).
+
+Verify after merging, and give it up to ten minutes:
+
+```sh
+site-status --site me
+curl -fsS https://me.ondralinek.cz/deployed.json           # {"commit": "...", "deployed_at": "..."}
+git -C ~/repos/www rev-parse origin/master
+```
+
+The three commits must match. If it has not moved after two timer cycles, read
+`journalctl -u site-deploy -n 50`, report the commit that should be live and the
+one that is, and do not rsync into `/var/www` or edit a live file to compensate.
+The `static-site-deploy` skill has the full procedure.
